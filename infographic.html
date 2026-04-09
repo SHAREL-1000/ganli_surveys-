@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Secular+One&display=swap');
+
+  :root {
+    --bg: #0B1120;
+    --card: #111B2E;
+    --card-border: rgba(255,255,255,0.06);
+    --card-hover: #152238;
+    --blue: #4A90D9;
+    --blue-lt: rgba(74,144,217,0.12);
+    --green: #34C759;
+    --green-lt: rgba(52,199,89,0.12);
+    --coral: #FF6B6B;
+    --coral-lt: rgba(255,107,107,0.10);
+    --gold: #FFD60A;
+    --gold-lt: rgba(255,214,10,0.10);
+    --purple: #BF5AF2;
+    --purple-lt: rgba(191,90,242,0.10);
+    --cyan: #64D2FF;
+    --cyan-lt: rgba(100,210,255,0.10);
+    --orange: #FF9F0A;
+    --orange-lt: rgba(255,159,10,0.10);
+    --t1: #F5F5F7;
+    --t2: #C7C7CC;
+    --t3: #8E8E93;
+    --t4: #636366;
+    --sh: 0 2px 12px rgba(0,0,0,0.3);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html, body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--bg);
+    color: var(--t1);
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ═══ TOP BAR ═══ */
+  .top-bar {
+    background: var(--card);
+    border-bottom: 1px solid var(--card-border);
+    padding: 10px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .top-right {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brand {
+    font-size: 10px; font-weight: 600;
+    color: var(--gold);
+    background: var(--gold-lt);
+    border: 1px solid rgba(255,214,10,0.15);
+    border-radius: 6px; padding: 3px 10px;
+    letter-spacing: 0.3px;
+  }
+  .top-bar h1 {
+    font-family: 'Secular One', sans-serif;
+    font-size: 16px; color: var(--t1); line-height: 1.2;
+  }
+  .top-bar h1 .hl { color: var(--green); }
+  .top-left {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .top-sub { font-size: 10.5px; color: var(--t3); }
+  .hero-badge {
+    display: flex; align-items: baseline; gap: 6px;
+    background: var(--blue-lt);
+    border: 1px solid rgba(74,144,217,0.2);
+    border-radius: 8px; padding: 5px 16px;
+  }
+  .hero-badge .n {
+    font-family: 'Secular One', sans-serif;
+    font-size: 24px; color: var(--blue); line-height: 1;
+  }
+  .hero-badge .u { font-size: 11px; color: var(--t3); }
+
+  /* ═══ 2-COL GRID ═══ */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px 16px;
+    height: calc(100vh - 50px);
+    min-height: 0;
+  }
+  .col {
+    display: flex; flex-direction: column; gap: 8px;
+    min-height: 0; overflow: hidden;
+  }
+
+  /* ═══ CARD ═══ */
+  .card {
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--sh);
+    padding: 10px 12px;
+  }
+  .card-title {
+    font-size: 10px; font-weight: 600; color: var(--t3);
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 7px;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .card-title .line { flex:1; height:1px; background: var(--card-border); }
+
+  /* ═══ TOP ROW ═══ */
+  .top-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  /* ═══ AREAS ═══ */
+  .area-grid { display: flex; flex-direction: column; gap: 3px; }
+  .area-item {
+    background: rgba(74,144,217,0.06);
+    border: 1px solid rgba(74,144,217,0.08);
+    border-radius: 7px;
+    padding: 5px 9px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .area-item .al { font-size: 10.5px; color: var(--t2); }
+  .area-item .av {
+    font-family: 'Secular One', sans-serif;
+    font-size: 15px; color: var(--blue); line-height: 1;
+  }
+
+  /* ═══ BAR ═══ */
+  .sbar { display: flex; height: 20px; border-radius: 5px; overflow: hidden; gap: 2px; }
+  .sbar > div {
+    display:flex; align-items:center; justify-content:center;
+    font-size: 8.5px; font-weight: 700; color: #fff;
+  }
+  .sbar .s1 { background: var(--coral); flex:45; }
+  .sbar .s2 { background: var(--gold); flex:4; }
+  .sbar .s3 { background: var(--green); flex:25; }
+  .sbar .s4 { background: var(--purple); flex:9; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 2px 8px;
+    margin-top: 5px; justify-content: center;
+  }
+  .legend span {
+    display: flex; align-items: center; gap: 3px;
+    font-size: 8.5px; color: var(--t3);
+  }
+  .legend .ld { width:6px; height:6px; border-radius: 2px; }
+
+  /* ═══ STAT ROWS ═══ */
+  .stat-list { display: flex; flex-direction: column; }
+  .sr {
+    display: flex; align-items: center; gap: 7px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .sr:last-child { border-bottom: none; }
+  .sr-dot { width:6px; height:6px; border-radius: 2px; flex-shrink:0; }
+  .sr .txt { flex:1; font-size: 10.5px; color: var(--t2); font-weight: 400; line-height: 1.3; }
+  .sr .pct { font-size: 9.5px; color: var(--t4); font-weight: 500; }
+  .sr .num {
+    font-family: 'Secular One', sans-serif;
+    font-size: 15px; color: var(--t1); line-height:1;
+    min-width: 22px; text-align: left;
+  }
+
+  /* ═══ INSIGHTS ═══ */
+  .ins-card {
+    background: rgba(52,199,89,0.06);
+    border: 1px solid rgba(52,199,89,0.12);
+    border-radius: 10px; padding: 9px 12px;
+  }
+  .ins-card h3 { font-size: 10.5px; font-weight: 700; color: var(--green); margin-bottom: 5px; }
+  .ins-card li {
+    font-size: 10px; color: var(--t2); line-height: 1.55;
+    list-style: none; padding-right: 11px; position: relative; margin-bottom: 2px;
+  }
+  .ins-card li::before {
+    content: '›'; position: absolute; right: 0; top: 0;
+    color: var(--green); font-size: 11px; font-weight: 700;
+  }
+
+  /* ═══ CONTACTS ═══ */
+  .contacts-card {
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--sh);
+    padding: 9px 12px;
+  }
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 14px;
+  }
+  .contact-row {
+    display: flex; align-items: center; gap: 7px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .contact-row:last-child { border-bottom: none; }
+  .contact-avatar {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: #fff;
+    flex-shrink: 0; background: var(--blue);
+  }
+  .contact-avatar.c2 { background: var(--purple); }
+  .contact-avatar.c3 { background: var(--orange); }
+  .contact-avatar.c4 { background: var(--green); }
+  .contact-avatar.c5 { background: var(--coral); }
+  .contact-avatar.c6 { background: var(--cyan); }
+  .contact-info { flex: 1; min-width: 0; }
+  .contact-name { font-size: 10px; font-weight: 600; color: var(--t1); line-height: 1.3; }
+  .contact-gan { font-size: 8.5px; color: var(--t3); line-height: 1.3; }
+  .contact-phone {
+    direction: ltr; text-align: right;
+    font-size: 9.5px; font-weight: 600; color: var(--cyan);
+    margin-top: 1px;
+  }
+  .contact-phone a { color: var(--cyan); text-decoration: none; }
+
+  /* ═══ BOTTOM ═══ */
+  .bottom-card {
+    background: var(--card);
+    border: 1px solid var(--coral);
+    border-radius: 10px;
+    padding: 7px 12px;
+    text-align: center;
+  }
+  .bottom-card p {
+    font-size: 11px; font-weight: 500; color: var(--t2); line-height: 1.5;
+  }
+  .bottom-card .em { color: var(--coral); font-weight: 700; }
+
+  /* ═══ GAN LISTS ═══ */
+  .gan-group { margin-bottom: 6px; }
+  .gan-group:last-child { margin-bottom: 0; }
+  .gan-header {
+    display: flex; align-items: center; gap: 5px;
+    padding: 4px 8px; border-radius: 6px; margin-bottom: 3px;
+    font-size: 10px; font-weight: 700; color: var(--t1);
+  }
+  .gh-coral { background: var(--coral-lt); border: 1px solid rgba(255,107,107,0.12); }
+  .gh-orange { background: var(--orange-lt); border: 1px solid rgba(255,159,10,0.12); }
+  .gh-gold { background: var(--gold-lt); border: 1px solid rgba(255,214,10,0.12); }
+  .gh-green { background: var(--green-lt); border: 1px solid rgba(52,199,89,0.12); }
+  .gh-purple { background: var(--purple-lt); border: 1px solid rgba(191,90,242,0.12); }
+  .gh-cyan { background: var(--cyan-lt); border: 1px solid rgba(100,210,255,0.12); }
+  .gan-header .gc { margin-right:auto; margin-left:0; font-size:9px; color:var(--t3); font-weight:500; }
+  .gan-pills { display: flex; flex-wrap: wrap; gap: 3px; padding-right: 4px; }
+  .gp {
+    font-size: 9.5px; color: var(--t2);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--card-border);
+    border-radius: 5px; padding: 2px 7px; line-height: 1.4;
+  }
+
+  /* ═══ HELPERS ═══ */
+  .grow { flex: 1; min-height: 0; overflow-y: auto; }
+  .grow::-webkit-scrollbar { width: 3px; }
+  .grow::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
+
+  /* ═══ MOBILE ═══ */
+  @media (max-width: 768px) {
+    html, body { height: auto; overflow: auto; }
+    .grid { grid-template-columns: 1fr; height: auto; padding: 12px; }
+    .top-row { grid-template-columns: 1fr; }
+    .contacts-grid { grid-template-columns: 1fr; }
+    .col { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="top-right">
+    <div class="brand">גן לי ✦ קהילת מסגרות לקטנטנים</div>
+    <h1>מצב מסגרות לגיל הרך — <span class="hl">תל אביב</span></h1>
+  </div>
+  <div class="top-left">
+    <span class="top-sub">עדכון אחרון: 05.04.2026</span>
+    <div class="hero-badge">
+      <span class="n">67</span>
+      <span class="u">תשובות</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2-COL GRID -->
+<div class="grid">
+
+  <!-- COL RIGHT: Data -->
+  <div class="col">
+    <div class="top-row">
+      <div class="card">
+        <div class="card-title">פילוח לפי אזורים <span class="line"></span></div>
+        <div class="area-grid">
+          <div class="area-item"><span class="al">צפון ישן</span><span class="av">32</span></div>
+          <div class="area-item"><span class="al">מרכז</span><span class="av">25</span></div>
+          <div class="area-item"><span class="al">רמת אביב והסביבה</span><span class="av">7</span></div>
+          <div class="area-item"><span class="al">יד אליהו / מזרח ת״א</span><span class="av">2</span></div>
+          <div class="area-item"><span class="al">דרום תל אביב</span><span class="av">1</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="card-title">מצב המסגרות <span class="line"></span></div>
+        <div class="sbar">
+          <div class="s1">45%</div>
+          <div class="s2"></div>
+          <div class="s3">25%</div>
+          <div class="s4">9%</div>
+        </div>
+        <div class="legend">
+          <span><i class="ld" style="background:var(--coral)"></i>סגור</span>
+          <span><i class="ld" style="background:var(--gold)"></i>חלקי</span>
+          <span><i class="ld" style="background:var(--green)"></i>מפגשים</span>
+          <span><i class="ld" style="background:var(--purple)"></i>בבתים</span>
+        </div>
+        <div style="margin-top:5px;">
+          <div class="stat-list">
+            <div class="sr">
+              <div class="sr-dot" style="background:var(--coral)"></div>
+              <span class="txt">סגור ללא פתרון</span>
+              <span class="pct">45%</span><span class="num">30</span>
+            </div>
+            <div class="sr">
+              <div class="sr-dot" style="background:var(--green)"></div>
+              <span class="txt">מפגשים משותפים (צוות+הורים+ילדים)</span>
+              <span class="pct">25%</span><span class="num">17</span>
+            </div>
+            <div class="sr">
+              <div class="sr-dot" style="background:var(--purple)"></div>
+              <span class="txt">מפגשים בבתים של הורים</span>
+              <span class="pct">9%</span><span class="num">6</span>
+            </div>
+            <div class="sr">
+              <div class="sr-dot" style="background:var(--gold)"></div>
+              <span class="txt">פתוח חלקית</span>
+              <span class="pct">4%</span><span class="num">3</span>
+            </div>
+            <div class="sr">
+              <div class="sr-dot" style="background:var(--cyan)"></div>
+              <span class="txt">מתווה החזרים / זיכוי</span>
+              <span class="pct">43%</span><span class="num">29</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ins-card">
+      <h3>תובנות בולטות</h3>
+      <ul>
+        <li>45% מהתשובות מדווחות על גנים סגורים — פער גדול מול גנים יוזמים</li>
+        <li>43% מדווחים על מתווה החזרים — חלקם עדיין בהמתנה בלי מתווה ברור</li>
+        <li>12 גנים עם מפגשים משותפים — הפתרונות הקהילתיים ממשיכים להתרחב</li>
+        <li>נתונים חדשים: דרום ת״א, ויצו למד, גן לב, פעוטון הצוציקים</li>
+      </ul>
+    </div>
+
+    <div class="contacts-card grow">
+      <div class="card-title">אנשי קשר — מוכנים שיפנו אליהם <span class="line"></span></div>
+      <div class="contacts-grid">
+        <div class="contact-row">
+          <div class="contact-avatar">דג</div>
+          <div class="contact-info">
+            <div class="contact-name">דניאל גולדברג</div>
+            <div class="contact-gan">איירן ויפעת · מרכז</div>
+            <div class="contact-phone"><a href="tel:0544835324">054-483-5324</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-avatar c2">ל</div>
+          <div class="contact-info">
+            <div class="contact-name">ליטל</div>
+            <div class="contact-gan">ילדות קסומה · צפון ישן</div>
+            <div class="contact-phone"><a href="tel:0508128894">050-812-8894</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-avatar c3">—</div>
+          <div class="contact-info">
+            <div class="contact-name">לא הזדהה</div>
+            <div class="contact-gan">טודו דיאלוגי נווה צדק · מרכז</div>
+            <div class="contact-phone"><a href="tel:0528910201">052-891-0201</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-avatar c4">ה</div>
+          <div class="contact-info">
+            <div class="contact-name">הילה</div>
+            <div class="contact-gan">נסט · צפון ישן</div>
+            <div class="contact-phone"><a href="tel:0506456064">050-645-6064</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-avatar c5">—</div>
+          <div class="contact-info">
+            <div class="contact-name">לא הזדהה</div>
+            <div class="contact-gan">גן לי ים · צפון ישן</div>
+            <div class="contact-phone"><a href="tel:0523350870">052-335-0870</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-avatar c6">—</div>
+          <div class="contact-info">
+            <div class="contact-name">לא הזדהה</div>
+            <div class="contact-gan">פעוטון הצוציקים · צפון ישן</div>
+            <div class="contact-phone"><a href="tel:0524151908">052-415-1908</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-card">
+      <p>רוב הגנים <span class="em">לא פועלים כרגיל</span>. הרבה פתרונות הם חלקיים או זמניים.</p>
+    </div>
+  </div>
+
+  <!-- COL LEFT: Gan Lists -->
+  <div class="col">
+    <div class="card grow">
+      <div class="card-title">פירוט גנים לפי סטטוס <span class="line"></span></div>
+
+      <!-- CLOSED - NO SOLUTION -->
+      <div class="gan-group">
+        <div class="gan-header gh-coral">
+          🔴 סגור ללא פתרון
+          <span class="gc">16 גנים</span>
+        </div>
+        <div class="gan-pills">
+          <span class="gp">ממלכת האור</span><span class="gp">נסט</span>
+          <span class="gp">החממה של איתי</span><span class="gp">רני ושניקי</span>
+          <span class="gp">אירן ויפעת</span><span class="gp">הגן של יעל</span>
+          <span class="gp">המשפחתון של כנרת</span><span class="gp">המשפחתון של קאינה</span>
+          <span class="gp">טודו דיאלוגי נווה צדק</span><span class="gp">גנוש</span>
+          <span class="gp">סטודיו קידס</span><span class="gp">ממלכת הילדים</span>
+          <span class="gp">אקונה מטטה</span><span class="gp">ויצו קינג ג׳ורג׳</span>
+          <span class="gp">מעון דפנה</span><span class="gp">פרחי יסמין</span>
+        </div>
+      </div>
+
+      <!-- CLOSED - PARTIAL RESPONSE -->
+      <div class="gan-group">
+        <div class="gan-header gh-orange">
+          🟠 סגור עם מענה חלקי מאוד
+          <span class="gc">3 גנים</span>
+        </div>
+        <div class="gan-pills">
+          <span class="gp">ממלכת האור (מגיד) — מעט מאוד קשר</span>
+          <span class="gp">יסמין — קשר דיגיטלי + מפגש אחד</span>
+          <span class="gp">ידיים אוהבות — סגור, ממתינים למתווה</span>
+        </div>
+      </div>
+
+      <!-- OPEN PARTIAL -->
+      <div class="gan-group">
+        <div class="gan-header gh-gold">🟡 פתוח חלקית <span class="gc">2 גנים</span></div>
+        <div class="gan-pills">
+          <span class="gp">המשפחתון של רונית</span>
+          <span class="gp">פעוטון הצוציקים</span>
+        </div>
+      </div>
+
+      <!-- MEETINGS -->
+      <div class="gan-group">
+        <div class="gan-header gh-green">🟢 מפגשים משותפים <span class="gc">12 גנים</span></div>
+        <div class="gan-pills">
+          <span class="gp">גנוש</span><span class="gp">סטודיו קידס</span>
+          <span class="gp">איירן ויפעת</span><span class="gp">סאנשיין</span>
+          <span class="gp">סוס עץ ביצרון</span><span class="gp">ילדי הטבע הדמוקרטי - בבלי</span>
+          <span class="gp">ילדי אומנויות</span><span class="gp">אצל שיר לי בחצר</span>
+          <span class="gp">פשוט גן</span><span class="gp">ריינבו</span>
+          <span class="gp">נסט</span><span class="gp">גן לב</span>
+        </div>
+      </div>
+
+      <!-- HOMES -->
+      <div class="gan-group">
+        <div class="gan-header gh-purple">🏠 מפגשים בבתים של הורים <span class="gc">4 גנים</span></div>
+        <div class="gan-pills">
+          <span class="gp">הגן הקסום</span><span class="gp">משפחתון של מרגלית</span>
+          <span class="gp">סאנשיין</span><span class="gp">איירן ויפעת</span>
+        </div>
+      </div>
+
+      <!-- REFUNDS -->
+      <div class="gan-group">
+        <div class="gan-header gh-cyan">💰 מתווה החזרים / זיכוי <span class="gc">17 גנים</span></div>
+        <div class="gan-pills">
+          <span class="gp">סטודיו קידס</span><span class="gp">איירן ויפעת</span>
+          <span class="gp">רגעים</span><span class="gp">ילדות קסומה</span>
+          <span class="gp">אנוק</span><span class="gp">נסט</span>
+          <span class="gp">גן לי ים</span><span class="gp">אצל שיר לי בחצר</span>
+          <span class="gp">אקונה מטטה</span><span class="gp">צעירי תל אביב</span>
+          <span class="gp">ידיים אוהבות</span><span class="gp">יסמין</span>
+          <span class="gp">לולו</span><span class="gp">ויצו למד</span>
+          <span class="gp">גן לב</span><span class="gp">המשפחתון של כנרת</span>
+          <span class="gp">פעוטון הצוציקים</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
